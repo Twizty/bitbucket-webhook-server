@@ -61,8 +61,65 @@ type BaseResponse struct {
   Repository  Repository  `json:"repository"`
 }
 
-type PushResponse struct {
+type Hstore map[string]string
+
+type Issue struct {
+  Id          int         `json:"id"`
+  Component   string      `json:"component"`
+  Title       string      `json:"title"`
+  Content     Hstore      `json:"content"`
+  Priority    string      `json:"priority"`
+  State       string      `json:"state"`
+  Type        string      `json:"type"`
+  Milestone   Hstore      `json:"milestone"`
+  Version     Hstore      `json:"version"`
+  CreatedOn   time.Time   `json:"created_on"`
+  UpdatedOn   time.Time   `json:"updated_on"`
+  Links       Links       `json:"links"`
+}
+
+type Inline struct {
+  Path        string      `json:"path"`
+  From        int         `json:"from"`
+  To          int         `json:"to"`
+}
+
+type Comment struct {
+  Id          int         `json:"id"`
+  Parent   map[string]int `json:"parent"`
+  Content     Hstore      `json:"content"`
+  Inline      Inline      `json:"inline"`
+  CreatedOn   time.Time   `json:"created_on"`
+  UpdatedOn   time.Time   `json:"updated_on"`
+  Links       Links       `json:"links"`
+}
+
+type Source struct {
+  Branch      Hstore      `json:"branch"`
+  Commit      Hstore      `json:"commit"`
+  Repository  Repository  `json:"repository"`
+}
+
+type PullRequest struct {
+  Id          int         `json:"id"`
+  Title       string      `json:"title"`
+  Description string      `json:"description"`
+  State       string      `json:"state"`
+  Author      User        `json:"author"`
+  Source      Source      `json:"source"`
+  Destination Source      `json:"destination"`
+  MergeCommit Hstore      `json:"merge_commit"`
+  Participants []User     `json:"participants"`
+  Reviewers   []User      `json:"reviewers"`
+  CreatedOn   time.Time   `json:"created_on"`
+  UpdatedOn   time.Time   `json:"updated_on"`
+  Links       Links       `json:"links"`
+}
+
+type Response struct {
   Actor       *User       `json:"actor"`
   Repository  *Repository `json:"repository"`
   Push        *Push       `json:"push"`
+  Fork        *Repository `json:"fork"`
+  Issue       *Issue      `json:"issue"`
 }
