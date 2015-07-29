@@ -116,10 +116,47 @@ type PullRequest struct {
   Links       Links       `json:"links"`
 }
 
-type Response struct {
+type PushResponse struct {
   Actor       *User       `json:"actor"`
   Repository  *Repository `json:"repository"`
   Push        *Push       `json:"push"`
+}
+
+type ForkResponse struct {
+  Actor       *User       `json:"actor"`
+  Repository  *Repository `json:"repository"`
   Fork        *Repository `json:"fork"`
+}
+
+type RepositoryCommentResponse struct {
+  Actor       *User       `json:"actor"`
+  Repository  *Repository `json:"repository"`
+  Comment     *Comment    `json:"comment"`
+  Commit      *Hstore     `json:"commit"`
+}
+
+type IssueResponse {
+  Actor       *User       `json:"actor"`
+  Repository  *Repository `json:"repository"`
   Issue       *Issue      `json:"issue"`
+}
+
+type IssueCommentResponse struct {
+  Actor       *User       `json:"actor"`
+  Repository  *Repository `json:"repository"`
+  Issue       *Issue      `json:"issue"`
+  Commit      *Hstore     `json:"commit"`
+}
+
+type PullRequestResponse struct {
+  Actor       *User       `json:"actor"`
+  Repository  *Repository `json:"repository"`
+  PullRequest *PullRequest `json:"pull_request"`
+}
+
+type PullRequestCommentResponse struct {
+  Actor       *User       `json:"actor"`
+  Repository  *Repository `json:"repository"`
+  PullRequest *PullRequest `json:"pull_request"`
+  Comment     *Comment    `json:"comment"`
 }
