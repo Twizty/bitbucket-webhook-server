@@ -6,6 +6,8 @@ import (
 
 type Links map[string]map[string]string
 
+type JSON map[string]interface{}
+
 type User struct {
   Username    string      `json:"username"`
   DisplayName string      `json:"display_name"`
@@ -111,6 +113,9 @@ type PullRequest struct {
   MergeCommit Hstore      `json:"merge_commit"`
   Participants []User     `json:"participants"`
   Reviewers   []User      `json:"reviewers"`
+  CloseSourceBranch bool  `json:"close_source_branch"`
+  ClosedBy    User        `json:"closed_by"`
+  Reason      string      `json:"reason"`
   CreatedOn   time.Time   `json:"created_on"`
   UpdatedOn   time.Time   `json:"updated_on"`
   Links       Links       `json:"links"`
@@ -135,7 +140,7 @@ type RepositoryCommentResponse struct {
   Commit      *Hstore     `json:"commit"`
 }
 
-type IssueResponse {
+type IssueResponse struct {
   Actor       *User       `json:"actor"`
   Repository  *Repository `json:"repository"`
   Issue       *Issue      `json:"issue"`
@@ -159,4 +164,9 @@ type PullRequestCommentResponse struct {
   Repository  *Repository `json:"repository"`
   PullRequest *PullRequest `json:"pull_request"`
   Comment     *Comment    `json:"comment"`
+}
+
+type Approval struct {
+  Date        time.Time   `json:"date"`
+  User        User        `json:"user"`
 }

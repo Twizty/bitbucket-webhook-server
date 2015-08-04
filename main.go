@@ -12,21 +12,17 @@ import (
 func WebhooksHandler(res http.ResponseWriter, req *http.Request) {
   decoder := json.NewDecoder(req.Body)
   var push structs.Response
-  var hashPush map[string]interface{}
-  // if err := decoder.Decode(&push); err != nil {
-  //   res.WriteHeader(500)
-  //   fmt.Println(err)
-  //   return
-  // }
 
-  decoder.Decode(&hashPush)
-  
+  if err := decoder.Decode(&push); err != nil {
+    fmt.Println(err)
+  }
 
   b, err := json.MarshalIndent(push, "", "  ")
   if err != nil {
     fmt.Println("Error in marshalling")
   }
   fmt.Printf("%s\n", b)
+  fmt.Println(push.Type())
   res.WriteHeader(204)
   res.Write([]byte(""))
 }
